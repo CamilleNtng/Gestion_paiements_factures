@@ -10,7 +10,9 @@ public class Admin {
 	@Id
 	private int id;
 	
-	private int password;
+	private String passwordAdmin;
+	private String loginAdmin;
+	
 	private String nom;
 	private String prenom;
 	

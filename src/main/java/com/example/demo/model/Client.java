@@ -13,9 +13,11 @@ public class Client {
 	@Id
 	private int codeClient;
 	
+	private String passwordClient;
+	private String loginClient;
+	
 	private String nom;
 	private String prenom;
-	private String password;
 	
 	@OneToMany(mappedBy="client")
 	private Set<ModePaiement> setModePaiement; 
