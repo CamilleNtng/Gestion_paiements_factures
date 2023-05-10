@@ -5,8 +5,13 @@ import lombok.Data;
 
 @Data
 @Entity
-@DiscriminatorValue(value = "Admin")
 public class Admin {
 
+	@Id
+	private int id;
+	
+	private int password;
+	private String nom;
+	private String prenom;
 	
 }

@@ -15,6 +15,7 @@ public class Client {
 	
 	private String nom;
 	private String prenom;
+	private String password;
 	
 	@OneToMany(mappedBy="client")
 	private Set<ModePaiement> setModePaiement; 
