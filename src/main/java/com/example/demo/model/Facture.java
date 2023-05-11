@@ -13,7 +13,7 @@ public class Facture {
 	
 	private int montantF;
 	
-	@ManyToMany(mappedBy="modePaiement")
+	@ManyToMany(mappedBy="factures")
 	private List<ModePaiement> paiementFacture = new ArrayList<ModePaiement>();
 	
 }

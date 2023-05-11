@@ -12,7 +12,6 @@ import lombok.Data;
 @DiscriminatorValue(value = "CarteBancaire")
 public class CarteBancaire extends ModePaiement {
 	
-	@Id
 	private int numCarte;
 	
 	private LocalDate dateExpiration;//yyyy-mm-dd

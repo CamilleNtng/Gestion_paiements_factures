@@ -6,12 +6,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import ch.qos.logback.core.model.Model;
-import jakarta.persistence.Entity;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 
-@Entity
 @Data
 @Controller
 public class ClientController {

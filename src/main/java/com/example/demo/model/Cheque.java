@@ -8,7 +8,6 @@ import lombok.Data;
 @DiscriminatorValue(value = "Cheque")
 public class Cheque extends ModePaiement {
 	
-	@Id
 	private int numCheque;
 
 }
