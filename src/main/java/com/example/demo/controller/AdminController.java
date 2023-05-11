@@ -1,46 +1,39 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.repository.AdminRepository;
-
+import ch.qos.logback.core.model.Model;
 import jakarta.persistence.Entity;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 
 @Entity
 @Data
+@Controller
 public class AdminController {
-	
-	@Autowired
-	AdminRepository adminRepository;
 
 	@GetMapping(value="/connexionAdmin")
 	public String ConnexionAdmin() {
-		return "connexionAdmin";
+		return "connexionAdmin.html";
 	}
 	
-	@PostMapping(value="/connexionAdmin")
-	public ModelAndView verifierConnexion(@RequestParam("loginAdmin") String login, @RequestParam("passwordAdmin") String password) {
+	@PostMapping("/connexionAdmin")
+	public String authentification(Model model,
+								   HttpSession session,
+								   @RequestParam("loginAdmin") String login) {
 		
-		ModelAndView m = new ModelAndView();
-		List<Object[]> list = adminRepository.getLoginPassword();		
+		String loginSession = (String) session.getAttribute("login");
 		
-//		if(list.contains((login,password))) {
-//			
-//			m.addObject("identifiant", login);
-//			m.setViewName("welcomeAdmin");
-//			
-//		}
-//		else {
-//			m.setViewName("connexionAdmin");
-//		}
-		return m;
+		if(loginSession == null) {
+			session.setAttribute("login", login);
+		}
+		
+		System.out.println("login dans la session : " + (String) session.getAttribute("login"));
+		return "welcomeAdmin.html";
 	}
+	
 }

@@ -1,60 +1,39 @@
 package com.example.demo.controller;
 
-import java.util.Optional;
-
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
+import ch.qos.logback.core.model.Model;
 import jakarta.persistence.Entity;
+import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
 
 @Entity
 @Data
+@Controller
 public class ClientController {
 
 	@GetMapping(value="/connexionClient")
 	public String ConnexionClient() {
-		return "connexionClient";
+		return "connexionClient.html";
 	}
 	
-	@PostMapping(value="/connexionClient")
-	public ModelAndView verifierConnexion(@RequestParam("loginClient") String login, @ RequestParam("passwordClient") String password) {
+	@PostMapping("/connexionClient")
+	public String authentification(Model model,
+								   HttpSession session,
+								   @RequestParam("loginClient") String login) {
 		
-		ModelAndView m = new ModelAndView();
+		String loginSession = (String) session.getAttribute("login");
 		
-		if(password.equals(login+"123")) {
-			
-			m.addObject("identifiant", login);
-			m.setViewName("welcomeClient");
-			
+		if(loginSession == null) {
+			session.setAttribute("login", login);
 		}
-		else {
-			m.setViewName("connexionClient");
-		}
-		return m;
+		
+		System.out.println("login dans la session : " + (String) session.getAttribute("login"));
+		return "welcomeClient.html";
 	}
 	
-//	@PostMapping(value="/connexion")
-//	public ModelAndView connexion(@RequestParam("login") String login,
-//								  @RequestParam("password") String password{
-//		
-//		ModelAndView m = new ModelAndView();
-//		
-//		// recherche de la personne s'il elle existe
-//		Optional<Personne> p = personneRepository.findById(nom);
-//		
-//		if(p.isPresent()) {
-//			// la personne existe
-//			
-//			
-//		} 
-//		else {
-//			
-//		}
-//		m.setViewName("");
-//		return m;
-//	}
 }
