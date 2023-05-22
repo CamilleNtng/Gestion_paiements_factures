@@ -1,0 +1,6 @@
+2023-05-22 10:20:55,675 [Worker-1: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2023-05-22 10:23:51,950 [Worker-10: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:demo:0.0.1-SNAPSHOT @ C:\Users\flore\Desktop\Polytech\S8\Archi\demo\pom.xml.
+2023-05-22 10:23:51,950 [Worker-16: Updating Maven Dependencies] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:demo:0.0.1-SNAPSHOT @ C:\Users\flore\Desktop\Polytech\S8\Archi\demo\pom.xml.
+2023-05-22 10:24:03,511 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 1 resource from src\main\resources to target\classes
+2023-05-22 10:24:03,549 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 4 resources from src\main\resources to target\classes
+2023-05-22 10:24:03,562 [Worker-10: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\Users\flore\Desktop\Polytech\S8\Archi\demo\src\test\resources

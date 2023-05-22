@@ -12,7 +12,7 @@ import com.example.demo.model.Admin;
 @Repository
 public interface AdminRepository extends JpaRepository<Admin, String>{
 
-	@Query("select a.login from Admin a")
+	@Query("select a.loginAdmin from Admin a")
 	public List<Object[]> ConnexionAdmin();
 	
 }

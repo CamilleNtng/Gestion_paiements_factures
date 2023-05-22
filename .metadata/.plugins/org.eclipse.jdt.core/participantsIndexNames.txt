@@ -1,0 +1,5 @@
+INDEX VERSION 1.132
+C:\Users\flore\Desktop\Polytech\S8\Archi\Gestion_paiements_factures\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\937554590.index
+\Project11\src\main\java
+C:\Users\flore\Desktop\Polytech\S8\Archi\Gestion_paiements_factures\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2469732179.index
+\demo\src\main\java

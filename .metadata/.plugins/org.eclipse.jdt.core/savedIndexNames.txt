@@ -1,0 +1,7 @@
+INDEX VERSION 1.132+C:\Users\flore\Desktop\Polytech\S8\Archi\Gestion_paiements_factures\.metadata\.plugins\org.eclipse.jdt.core
+435961445.index
+1865797976.index
+3022958287.index
+316144876.index
+3435648363.index
+712673515.index

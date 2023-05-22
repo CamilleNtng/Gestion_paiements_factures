@@ -1,0 +1,7 @@
+INDEX VERSION 1.4+C:\Users\flore\Desktop\Polytech\S8\Archi\Gestion_paiements_factures\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3178243732.index
+1678754330.index
+712673515.index
+3633410747.index
+435961445.index
+3022958287.index
