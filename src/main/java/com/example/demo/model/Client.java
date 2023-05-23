@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 import java.util.Set;
+import java.util.UUID;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.Data;
 public class Client {
 	
 	@Id
-	private int codeClient;
+	private UUID codeClient;
 	
 	private String passwordClient;
 	private String loginClient;

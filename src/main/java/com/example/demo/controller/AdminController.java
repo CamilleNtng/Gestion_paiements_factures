@@ -5,7 +5,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.model.Client;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.service.AdminService;
 
@@ -13,12 +15,17 @@ import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
 
+import java.security.SecureRandom;
+import java.util.UUID;
+
 
 @Data
 @Controller
 public class AdminController {
+	
 	@Autowired AdminService adminService;
 	@Autowired ClientRepository clientRepository;
+
 	@GetMapping(value="/connexionAdmin")
 	public String ConnexionAdmin() {
 		return "connexionAdmin.html";
@@ -26,9 +33,9 @@ public class AdminController {
 	
 	@PostMapping("/connexionAdmin")
 	public String authentification(Model model,
-								   HttpSession session,
-								   @RequestParam("loginAdmin") String login) {
-		
+									HttpSession session,
+								   	@RequestParam("loginAdmin") String login) {
+				
 		String loginSession = (String) session.getAttribute("login");
 		
 		if(loginSession == null) {
@@ -62,4 +69,35 @@ public class AdminController {
 		System.out.println(adminService.facture());
 	}
 	*/
+	
+	@PostMapping(value="/connexionAdmin")
+	public ModelAndView authentificationCheck(@RequestParam("loginAdmin") String login,
+											@RequestParam("passwordAdmin") String password) {
+		
+		ModelAndView m = new ModelAndView();
+		int n = clientRepository.checkUser(login, password);
+		
+		if( n == 1) {
+			m.addObject("id", login);
+			m.setViewName("welcomeAdmin.html");
+		}
+		
+		else {
+			//message d'erreur
+		}
+		
+		return m;		
+	}
+	
+	@GetMapping(value="/newAccount")
+	public String newAccount() {
+		return "formAccount.html";
+	}
+	
+	@PostMapping(value="/")
+	public ModelAndView generateAccount() {
+		ModelAndView m = new ModelAndView();
+		return m;
+	}
+		
 }
