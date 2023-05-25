@@ -1,5 +1,4 @@
 package com.example.demo.service;
-import org.springframework.util.StringUtils;
 
 import java.security.SecureRandom;
 import java.util.List;
@@ -19,25 +18,6 @@ public class AdminService {
 
 	@Autowired ClientRepository clientRepository;
 	@Autowired FactureRepository factureRepository;
-	
-	public Facture addFacture(int montant,int numFacture, String nom, String prenom) {
-		Facture f = new Facture();
-		f.setMontantF(montant);
-		f.setNumFacture(numFacture);
-		int numClient = clientRepository.getCodeClient(nom, prenom);
-	    f.setCodeClient(numClient);
-		f.setCodeClient(numClient);
-		factureRepository.save(f);
-		return f;
-	}
-		
-	public List<Facture> showFacture (int CodeClient){
-		return factureRepository.getFacture(CodeClient);
-	}
-	
-	public List<Facture> facture (){
-		return factureRepository.facture();
-	}
 	
 	public String createLogin(String nom, String prenom) {
 		String login = nom+prenom;
@@ -60,8 +40,9 @@ public class AdminService {
 		return password;
 	}
 	
-	public UUID createCode() {
-		UUID code = UUID.randomUUID();
+	public String createCode() {
+		UUID id = UUID.randomUUID();
+		String code = id.toString();
 		return code;
 	}
 	
@@ -74,11 +55,32 @@ public class AdminService {
 		client.setLoginClient(login);
 		String password = createPassword();
 		client.setPasswordClient(password);
-		UUID code = createCode();
+		String code = createCode();
 		client.setCodeClient(code);
 		clientRepository.save(client);
 		
 		return client;
 	}	
+	
+	/*
+	public Facture addFacture(int montant,int numFacture, String nom, String prenom) {
+		Facture f = new Facture();
+		f.setMontantF(montant);
+		f.setNumFacture(numFacture);
+		int numClient = clientRepository.getCodeClient(nom, prenom);
+	    f.setCodeClient(numClient);
+		f.setCodeClient(numClient);
+		factureRepository.save(f);
+		return f;
+	}
+		
+	public List<Facture> showFacture (int CodeClient){
+		return factureRepository.getFacture(CodeClient);
+	}
+	
+	public List<Facture> facture (){
+		return factureRepository.facture();
+	}
+	*/
 	
 }

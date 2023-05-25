@@ -12,7 +12,7 @@ import lombok.Data;
 public class Client {
 	
 	@Id
-	private UUID codeClient;
+	private String codeClient;
 	
 	private String passwordClient;
 	private String loginClient;

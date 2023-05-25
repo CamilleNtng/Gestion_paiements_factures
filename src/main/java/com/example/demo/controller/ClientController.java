@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.repository.ClientRepository;
-import com.example.demo.model.Client;
 
 import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpSession;

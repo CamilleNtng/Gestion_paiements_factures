@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>PolyFactures</title>
+</head>
+
+<style>
+.content {
+max-width : 500px;
+margin: auto;
+}
+</style>
+
+<body class="content">
+
+<form th:method=post th:action="@{/thymeleaftest}" th:object="${tache}"> <!-- route dans le controller -->
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Intitule</label>
+    <input th:field="*{intitule}" type="text" class="form-control" id="exampleInputPassword1">
+  </div>
+  <button type="submit" class="btn btn-primary">Ajouter la tache</button>
+</form>
+
+</body>
+</html>

@@ -12,17 +12,15 @@ import com.example.demo.model.Facture;
 @Repository
 public interface FactureRepository extends JpaRepository<Facture, String> {
 	 
-	/*
-	@Query("select * from Facture f")
+	@Query("select f.numFacture, f.intitule, f.montantF, f.codeClient from Facture f")
 	public List<Object[]> getFactures();
-	*/
 	
 	
-	
+	/*
 	@Query("SELECT f FROM Facture f WHERE f.codeClient = :codeClient")
 	List<Facture> getFacture(@Param("codeClient") int codeClient);
 	
 	@Query("SELECT f FROM Facture f")
 	List<Facture> facture();
-	
+	*/
 }

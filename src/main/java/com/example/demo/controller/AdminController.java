@@ -2,10 +2,10 @@ package com.example.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Client;
 import com.example.demo.model.Admin;
@@ -13,12 +13,8 @@ import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.service.AdminService;
 
-import ch.qos.logback.core.model.Model;
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
-
-import java.security.SecureRandom;
-import java.util.UUID;
 
 
 @Data
@@ -31,7 +27,6 @@ public class AdminController {
 
 	@GetMapping("/connexionAdmin")
 	public String ConnexionAdmin() {
-		
 		/*
 		Admin admin = new Admin();
 		admin.setId(0);
@@ -41,7 +36,6 @@ public class AdminController {
 		admin.setPrenom("florence");
 		adminRepository.save(admin);
 		*/
-		
 		return "connexionAdmin.html";
 	}
 	
@@ -61,6 +55,7 @@ public class AdminController {
 		int n = adminRepository.checkUser(login, password);
 		
 		if( n == 1) {
+			model.addAttribute("id", adminRepository.getName(loginSession));
 			return "welcomeAdmin.html";
 		}
 		
@@ -71,44 +66,21 @@ public class AdminController {
 		
 	}
 	
-	/*
-	@PostMapping("/connexionAdmin")
-	public ModelAndView authentificationCheck(@RequestParam("loginAdmin") String login,
-											@RequestParam("passwordAdmin") String password) {
-		
-		ModelAndView m = new ModelAndView();
-		
-		int n = adminRepository.checkUser(login, password);
-		
-		if( n == 1) {
-			m.addObject("id", login);
-			m.setViewName("welcomeAdmin.html");
-		}
-		
-		else {
-			//message d'erreur
-		}
-		
-		return m;		
-	}
-	*/
-	
-	
 	@GetMapping("/newAccount")
 	public String newAccount() {
 		return "formAccount.html";
 	}
 	
 	@PostMapping("/newAccount")
-	public ModelAndView account(@RequestParam("nom") String nom,
-								@RequestParam("prenom") String prenom) {
+	public String account(Model model,
+							@RequestParam("nom") String nom,
+							@RequestParam("prenom") String prenom) {
 		
-		ModelAndView m = new ModelAndView();
 		Client client = adminService.createAccount(nom, prenom);
-		m.setViewName("new.html");
-		return m;
+		String id = client.getCodeClient();
+		model.addAttribute("info", clientRepository.getInfo(id));
+		return "new.html";
 	}
-	
 	
 	/*
 	
