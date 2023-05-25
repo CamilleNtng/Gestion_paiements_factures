@@ -22,7 +22,8 @@ public class ClientController {
 
 	@GetMapping("/connexionClient")
 	public String ConnexionClient() {
-		
+		 
+		/*
 		Client test = new Client();
 		test.setCodeClient(null);
 		test.setLoginClient("test");
@@ -30,6 +31,7 @@ public class ClientController {
 		test.setPrenom("patient");
 		test.setNom("zero");
 		clientRepository.save(test);
+		*/
 		
 		return "connexionClient.html";
 	}

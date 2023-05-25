@@ -32,6 +32,7 @@ public class AdminController {
 	@GetMapping("/connexionAdmin")
 	public String ConnexionAdmin() {
 		
+		/*
 		Admin admin = new Admin();
 		admin.setId(0);
 		admin.setLoginAdmin("admin");
@@ -39,6 +40,7 @@ public class AdminController {
 		admin.setNom("camille");
 		admin.setPrenom("florence");
 		adminRepository.save(admin);
+		*/
 		
 		return "connexionAdmin.html";
 	}
