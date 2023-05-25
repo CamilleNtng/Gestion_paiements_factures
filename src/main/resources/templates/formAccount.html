@@ -2,9 +2,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Demande création d'un compte</title>
+<title>Polyfactures - créer un compte</title>
 </head>
+
 <body>
 
+	Demande de création d'un compte client :
+
+	<form method=post action="/newAccount">
+		Nom : <input type="text" name=nom value=""/>
+		Prénom :<input type="text" name=prenom value=""/>
+		<input type=submit value="Envoyer" />
+	</form>
+
+	<a class="btn btn-dark btn-sm" href="/home" role="button">Home</a>
+	
 </body>
+
 </html>
