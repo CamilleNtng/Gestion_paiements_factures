@@ -63,17 +63,7 @@ public class AdminService {
 	}	
 	
 	/*
-	public Facture addFacture(int montant,int numFacture, String nom, String prenom) {
-		Facture f = new Facture();
-		f.setMontantF(montant);
-		f.setNumFacture(numFacture);
-		int numClient = clientRepository.getCodeClient(nom, prenom);
-	    f.setCodeClient(numClient);
-		f.setCodeClient(numClient);
-		factureRepository.save(f);
-		return f;
-	}
-		
+			
 	public List<Facture> showFacture (int CodeClient){
 		return factureRepository.getFacture(CodeClient);
 	}

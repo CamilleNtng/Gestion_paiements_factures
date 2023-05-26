@@ -5,17 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Facture;
 
 import com.example.demo.repository.FactureRepository;
+import com.example.demo.service.FactureService;
 
 
 @Controller
 public class FactureController {
 
 	@Autowired FactureRepository factureRepository;
+	@Autowired FactureService factureService;
 		
 	
 	@GetMapping("/getAllInvoices")
@@ -31,6 +34,24 @@ public class FactureController {
 		
 		model.addAttribute("factures", factureRepository.getFactures());
 		
+		return "gererFacture.html";
+	}
+	
+	@GetMapping("/addInvoice")
+	public String formAddInvoice() {
+		return "addInvoice.html";
+	}
+	
+	@PostMapping("/addInvoice")
+	public String gererFacture(Model model,
+								@RequestParam("num") int num,
+								@RequestParam("intitule") String intitule,
+								@RequestParam("montant") int montant,
+								@RequestParam("nom") String nom,
+								@RequestParam("prenom") String prenom) {
+		
+		factureService.addFacture(num, intitule, montant, nom, prenom);
+		model.addAttribute("factures", factureRepository.getFactures());
 		return "gererFacture.html";
 	}
 	

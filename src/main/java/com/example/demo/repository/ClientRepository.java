@@ -14,7 +14,7 @@ import com.example.demo.model.Client;
 public interface ClientRepository extends JpaRepository<Client, String>{
 
 	@Query("SELECT c.codeClient from Client c where c.nom=:NOM and c.prenom=:PRENOM")
-	public int getCodeClient(@Param("NOM") String nom, @Param("PRENOM") String prenom);
+	public String getCodeClient(@Param("NOM") String nom, @Param("PRENOM") String prenom);
 	
 	@Query("SELECT count(*) from Client c WHERE c.loginClient=:LOGIN AND c.passwordClient=:PASSWORD")
 	public int checkUser(@Param("LOGIN") String login, @Param("PASSWORD") String password);
