@@ -7,11 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.model.Client;
 import com.example.demo.model.Admin;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClientRepository;
-import com.example.demo.service.AdminService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
@@ -21,13 +19,13 @@ import lombok.Data;
 @Controller
 public class AdminController {
 	
-	@Autowired AdminService adminService;
 	@Autowired ClientRepository clientRepository;
 	@Autowired AdminRepository adminRepository;
 
 	@GetMapping("/connexionAdmin")
 	public String ConnexionAdmin() {
 		/*
+		//faire condition if en allant chercher admin dans bdd
 		Admin admin = new Admin();
 		admin.setId(0);
 		admin.setLoginAdmin("admin");
@@ -50,7 +48,7 @@ public class AdminController {
 		if(loginSession == null) {
 			session.setAttribute("login", login);
 		}
-		System.out.println("login dans la session : " + (String) session.getAttribute("login"));
+		System.out.println("login dans la session : " + loginSession);
 		
 		int n = adminRepository.checkUser(login, password);
 		
@@ -66,45 +64,9 @@ public class AdminController {
 		
 	}
 	
-	@GetMapping("/newAccount")
-	public String newAccount() {
-		return "formAccount.html";
+	@GetMapping("/welcomeAdmin")
+	public String dashboard() {
+		return "welcomeAdmin.html";
 	}
-	
-	@PostMapping("/newAccount")
-	public String account(Model model,
-							@RequestParam("nom") String nom,
-							@RequestParam("prenom") String prenom) {
-		
-		Client client = adminService.createAccount(nom, prenom);
-		String id = client.getCodeClient();
-		model.addAttribute("info", clientRepository.getInfo(id));
-		return "new.html";
-	}
-	
-	/*
-	
-	@PostMapping(value="/test1")
-	public void test(@RequestParam("montant")int montant, @RequestParam("nom")String nom, @RequestParam("prenom") String prenom) {
-		adminService.addFacture(montant,nom,prenom);
-	}
-	
-	@GetMapping(value="/test1")
-	public String test() {
-		return "test1.html";
-	}
-	@PostMapping(value="/test1")
-	public String test1(@RequestParam("montant") int montant, @RequestParam("num_facture") int numFacture,@RequestParam("nom")String nom ,@RequestParam("prenom") String prenom){
-		adminService.addFacture(montant,numFacture,nom,prenom);
-		//System.out.println(adminService.addFacture(montant,numFacture,nom,prenom));
-		return "test1.html";
-		
-	}
-	
-	@PostMapping(value="/test1")
-	public void test1() {
-		System.out.println(adminService.facture());
-	}
-	*/
-		
+			
 }

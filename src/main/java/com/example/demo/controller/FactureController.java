@@ -6,12 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.model.Facture;
-
+import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.FactureRepository;
 import com.example.demo.service.FactureService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -19,23 +21,20 @@ public class FactureController {
 
 	@Autowired FactureRepository factureRepository;
 	@Autowired FactureService factureService;
+	@Autowired ClientRepository clientRepository;
 		
+	// vue factures côté admin
 	
 	@GetMapping("/getAllInvoices")
 	public String showPageInvoice(Model model, Facture facture) {
-		
-		/*// Test OK
-		Facture fac = new Facture();
-		fac.setIntitule("test");
-		fac.setMontantF(10);
-		fac.setNumFacture(0);
-	    fac.setCodeClient("822109a8-6607-4815-a7e2-a4613f6acc7b");
-		factureRepository.save(fac);*/
-		
+				
 		model.addAttribute("factures", factureRepository.getFactures());
 		
 		return "gererFacture.html";
 	}
+	
+	
+	// ajout facture par admin
 	
 	@GetMapping("/addInvoice")
 	public String formAddInvoice() {
@@ -55,37 +54,29 @@ public class FactureController {
 		return "gererFacture.html";
 	}
 	
-	/*
-	@GetMapping("/getAllInvoices")
-	public void testFacture() {
-		Facture facture = new Facture();
-		facture.setIntitule("test");
-		facture.setMontantF(10);
-		facture.setNumFacture(0);
-		facture.setCodeClient(null);
-	}*/
 	
-	//affecter facture a un client
+	// vues des factures côté client
 	
-	/*
-	@PostMapping(value="/affectInvoiceClient")
-	public ModelAndView affectInvoiceClient() { //@Request en arg
-		ModelAndView m = new ModelAndView();
-		return m;
+	@GetMapping("/invoicesToPay")
+	public String showInvoicesToPay(Model model, Facture facture, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String loginSession = (String) session.getAttribute("login");
+		System.out.println("login dans la session : " + loginSession);
+		String codeClient = clientRepository.getCodeClientFromLogin(loginSession);
+		model.addAttribute("factures", factureRepository.getInvoicesToPay(codeClient));
+		return "invoicesToPay.html";
 	}
 	
-	@GetMapping("/addInvoice")
-	public String showInvoices(Model model, Facture facture) {
-		model.addAttribute("factures", factureRepository.getFactures());
-		return "gererFacture.html";
+	@GetMapping("/invoicesPaid")
+	public String showInvoicesPaid(Model model, Facture facture, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		String loginSession = (String) session.getAttribute("login");
+		System.out.println("login dans la session : " + loginSession);
+		String codeClient = clientRepository.getCodeClientFromLogin(loginSession);
+		model.addAttribute("factures", factureRepository.getPaidInvoices(codeClient));
+		return "invoicesPaid.html";
 	}
-	
-	@PostMapping("/addInvoice")
-	public String gererFacture(Model model, Facture facture) {
-		factureRepository.save(facture);
-		model.addAttribute("factures", factureRepository.getFactures());
-		return "gererFacture.html";
-	}
-	*/
 	
 }

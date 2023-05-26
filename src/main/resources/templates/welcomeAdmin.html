@@ -18,20 +18,26 @@
 	text-align: center;
 }
 
+.choix{
+	padding: 30px;
+	text-align: center;
+}
+
 </style>
 
 <body>
 
 	<div class="texte">
 	Bienvenue 
-	<span th:utext="${id}"></span>
+	<p th:text="${id}"></p>
 	!
 	</div>
 	
-	
-	<a class="btn btn-secondary btn-lg" href="/formAccount" role="button">Ajouter un client</a>
+	<div class="choix">
+	<a class="btn btn-secondary btn-lg" href="/newAccount" role="button">Ajouter un client</a>
 	<a class="btn btn-secondary btn-lg" href="/getAllInvoices" role="button">Consulter les factures</a>
-	
+	<a class="btn btn-secondary btn-lg" href="/getAllTransactions" role="button">Consulter les transaction</a>
+	</div>
 	
 	<footer>
 	<div class="bouton">

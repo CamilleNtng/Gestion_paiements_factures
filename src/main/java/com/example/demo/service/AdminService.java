@@ -1,14 +1,12 @@
 package com.example.demo.service;
 
 import java.security.SecureRandom;
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Client;
-import com.example.demo.model.Facture;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.FactureRepository;
 
@@ -61,16 +59,5 @@ public class AdminService {
 		
 		return client;
 	}	
-	
-	/*
-			
-	public List<Facture> showFacture (int CodeClient){
-		return factureRepository.getFacture(CodeClient);
-	}
-	
-	public List<Facture> facture (){
-		return factureRepository.facture();
-	}
-	*/
-	
+		
 }

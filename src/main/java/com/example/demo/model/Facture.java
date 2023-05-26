@@ -14,6 +14,7 @@ public class Facture {
 	private String intitule;
 	private int montantF;
 	private String codeClient;
+	private String statut = "Non payée";
 	
 	@ManyToMany(mappedBy="factures")
 	private List<ModePaiement> paiementFacture = new ArrayList<ModePaiement>();

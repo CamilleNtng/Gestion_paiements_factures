@@ -1,7 +1,6 @@
 package com.example.demo.model;
 
 import java.util.Set;
-import java.util.UUID;
 
 import jakarta.persistence.*;
 import lombok.Data;

@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Polyfactures</title>
+<title>PolyFactures</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 </head>
 
 <style>
 .content {
-	max-width : 800px;
+	max-width : 500px;
 	margin: auto;
 }
 .bouton{
@@ -24,7 +24,7 @@
 <body class="content">
 
 <div class="texte">
-Listes des factures :
+Listes des factures à payer :
 </div>
 
 <table class="table">
@@ -33,8 +33,6 @@ Listes des factures :
       <th scope="col">Numéro</th>
       <th scope="col">Intitulé</th>
       <th scope="col">Montant</th>
-      <th scope="col">Client</th>
-      <th scope="col">Statut</th>
     </tr>
   </thead>
   <tbody>
@@ -42,8 +40,6 @@ Listes des factures :
       <td th:text = "${c[0]}"></td>
       <td th:text = "${c[1]}"></td>
       <td th:text = "${c[2]}">€</td>
-      <td th:text = "${c[3]}"></td>
-      <td th:text = "${c[4]}"></td>
       <td></td>
     </tr>
   </tbody>
@@ -51,11 +47,10 @@ Listes des factures :
 
 <footer>
 <div class="bouton">
-<a class="btn btn-secondary btn-lg" href="/addInvoice" role="button">Ajouter une facture</a>
-<a class="btn btn-dark" href="/welcomeAdmin" role="button">Dashboard</a>
+<a class="btn btn-danger btn-lg" href="/" role="button">PAYER</a>
+<a class="btn btn-dark" href="/welcomeClient" role="button">Dashboard</a>
 </div>
 </footer>
-
 
 </body>
 

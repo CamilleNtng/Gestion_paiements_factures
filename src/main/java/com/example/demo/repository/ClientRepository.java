@@ -22,4 +22,7 @@ public interface ClientRepository extends JpaRepository<Client, String>{
 	@Query("SELECT c.loginClient, c.passwordClient from Client c WHERE c.codeClient=:CODE")
 	public List<Object[]> getInfo(@Param("CODE") String code);
 	
+	@Query("SELECT c.codeClient from Client c where c.loginClient=:LOGIN")
+	public String getCodeClientFromLogin(@Param("LOGIN") String login);
+	
 }
