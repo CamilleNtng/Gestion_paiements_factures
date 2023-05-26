@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -67,6 +69,35 @@ public class FactureController {
 		model.addAttribute("factures", factureRepository.getInvoicesToPay(codeClient));
 		return "invoicesToPay.html";
 	}
+	
+	@PostMapping("/invoicesToPay")
+	public String processPayment(@RequestParam("selectedInvoices") List<String> selectedInvoices) {
+		
+	    if (selectedInvoices != null) {
+	        for (String invoiceNumber : selectedInvoices) {
+	            // Effectuez les opérations souhaitées avec chaque numéro de facture
+	            System.out.println("Facture sélectionnée : " + invoiceNumber);
+	        }
+	        return "pay.html";
+	    }
+	    else {
+	    	// messgage comme quoi il a rien selectionne le couz (sur meme vue ou ailleurs)
+	    	return "test1.html";
+	    }
+	    
+	}
+	
+	@GetMapping("/pay")
+	public String estimate(Model model) {
+		return "pay.html";
+	}
+	
+	@PostMapping("/pay")
+	public String estimatePaid() {
+		return "test1.html";
+	}
+	
+	
 	
 	@GetMapping("/invoicesPaid")
 	public String showInvoicesPaid(Model model, Facture facture, HttpServletRequest request) {

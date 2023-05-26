@@ -8,7 +8,7 @@
 
 <style>
 .content {
-	max-width : 500px;
+	max-width : 800px;
 	margin: auto;
 }
 .bouton{
@@ -16,20 +16,30 @@
 	text-align: center;
 }
 .texte{
-	padding: 70px;
+	padding: 40px;
 	text-align: center;
+}
+.instruction{
+	left : 400px;
+	padding: 40px;
 }
 </style>
 
 <body class="content">
 
 <div class="texte">
-Listes des factures à payer :
+Listes des factures à payer :<br>
 </div>
 
+<div class="instruction">
+Vous pouvez sélectionner les factures que vous souhaitez régler, puis cliquer sur "PAYER". <br>
+</div>
+
+<form method=post action="/invoicesToPay">
 <table class="table">
   <thead>
     <tr>
+    <th scope="col">Sélection</th>
       <th scope="col">Numéro</th>
       <th scope="col">Intitulé</th>
       <th scope="col">Montant</th>
@@ -37,17 +47,22 @@ Listes des factures à payer :
   </thead>
   <tbody>
     <tr th:each="c : ${factures}">
+    <td><input class="form-check-input" type="checkbox" name="selectedInvoices" th:value="${c[0]}"></td>
       <td th:text = "${c[0]}"></td>
       <td th:text = "${c[1]}"></td>
-      <td th:text = "${c[2]}">€</td>
+      <td th:text = "${c[2]} + €"></td>
       <td></td>
     </tr>
   </tbody>
 </table>
 
+<div class="bouton">
+<input type=submit class="btn btn-danger btn-lg" value="PAYER" />
+</div>
+</form>
+
 <footer>
 <div class="bouton">
-<a class="btn btn-danger btn-lg" href="/" role="button">PAYER</a>
 <a class="btn btn-dark" href="/welcomeClient" role="button">Dashboard</a>
 </div>
 </footer>

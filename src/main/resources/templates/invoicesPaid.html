@@ -39,7 +39,7 @@ Listes des factures payées :
     <tr th:each="c : ${factures}">
       <td th:text = "${c[0]}"></td>
       <td th:text = "${c[1]}"></td>
-      <td th:text = "${c[2]}">€</td>
+      <td th:text = "${c[2]} + €"></td>
       <td></td>
     </tr>
   </tbody>
