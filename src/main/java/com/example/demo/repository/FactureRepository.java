@@ -21,4 +21,7 @@ public interface FactureRepository extends JpaRepository<Facture, String> {
 	@Query("select f.numFacture, f.intitule, f.montantF from Facture f where f.statut='Non payée' and f.codeClient=:CODE")
 	public List<Object[]> getInvoicesToPay(@Param("CODE") String code);
 	
+	@Query("select f.numFacture, f.intitule, f.montantF from Facture f where f.numFacture=:NUM")
+	public List<Object[]> getInvoicesByNum(@Param("NUM") String num);
+	
 }

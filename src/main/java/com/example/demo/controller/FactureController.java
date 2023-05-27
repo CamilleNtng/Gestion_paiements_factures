@@ -1,6 +1,6 @@
 package com.example.demo.controller;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,13 +71,26 @@ public class FactureController {
 	}
 	
 	@PostMapping("/invoicesToPay")
-	public String processPayment(@RequestParam("selectedInvoices") List<String> selectedInvoices) {
+	public String processPayment(Model model, Facture facture,
+								@RequestParam("selectedInvoices") List<String> selectedInvoices) {
+		
+		List<Object[]> factures = new ArrayList<Object[]>();
 		
 	    if (selectedInvoices != null) {
+	    		    	
 	        for (String invoiceNumber : selectedInvoices) {
-	            // Effectuez les opérations souhaitées avec chaque numéro de facture
+	        	factures.addAll(factureRepository.getInvoicesByNum(invoiceNumber));
 	            System.out.println("Facture sélectionnée : " + invoiceNumber);
 	        }
+	        model.addAttribute("choix", factures);
+	        
+	        int sommeMontants = 0;
+	        for (Object[] c : factures) {
+	            int montant = Integer.parseInt(c[2].toString());
+	            sommeMontants += montant;
+	        }
+	        model.addAttribute("sommeMontants", sommeMontants);
+	        	        
 	        return "pay.html";
 	    }
 	    else {
@@ -93,8 +106,17 @@ public class FactureController {
 	}
 	
 	@PostMapping("/pay")
-	public String estimatePaid() {
-		return "test1.html";
+	public String estimatePaid(@RequestParam("modepaiement") String modepaiement) {
+		
+		if (modepaiement.equals("carte")) {
+			return "paiementCarte.html";
+	    } else if (modepaiement.equals("cheque")) {
+	    	return "paiementCheque.html";
+	    }
+	    else {
+	    	return "test1.html";
+	    }
+		
 	}
 	
 	

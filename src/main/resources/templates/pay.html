@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>PolyFactures</title>
@@ -20,7 +20,7 @@
 	text-align: center;
 }
 </style>
-
+<!-- liste des factures séléctionnées, choix du mode de reglement, calcul total, payer -->
 <body>
 
 	<div class="texte">
@@ -28,24 +28,41 @@
 	</div>
 
 	<div class="card" style="width: 30rem;">
+	
 		<form method=post action="/pay">
 		
-		<!-- liste des factures s�l�ctionn�es, choix du mode de reglement, calcul total, payer -->
-		
-		<!--  
-		
+			<table class="table table-bordered border-primary">
+		  		<thead>
+				    <tr>
+						<th scope="col">Numéro</th>
+					    <th scope="col">Intitulé</th>
+					    <th scope="col">Montant</th>
+				    </tr>
+		  		</thead>
+		  		<tbody>
+			        <tr th:each="c : ${choix}">
+			            <td th:text="${c[0]}"></td>
+			            <td th:text="${c[1]}"></td>
+			            <td th:text="${c[2]} + ' €'"></td>
+			        </tr>
+			    </tbody>
+			    <tfoot>
+			        <tr>
+			            <th scope="row">TOTAL</th>
+			            <td></td>
+			            <td th:text="${sommeMontants + ' €'}"></td>
+			        </tr>
+			    </tfoot>
+			</table>
+				
 			<div class="mb-3">
-				<label for="nom" class="form-label">Nom</label>
-				<input type="text" class="form-control" id="nom" name=nom value=""/>
+				<p><br>Sélectionner un mode de paiement :</p>	
+				<input class="form-check-input" type="radio" name="modepaiement" value="carte">
+				<label class="form-check-label" for="carte">Carte bancaire</label> <br>	
+				<input class="form-check-input" type="radio" name="modepaiement" value="cheque">
+				<label class="form-check-label" for="cheque">Chèque</label> <br>
 			</div>
-			
-			<div class="mb-3">
-				<label for="prenom" class="form-label">Pr�nom</label>
-				<input type="text" class="form-control" id="prenom" name=prenom value=""/>
-			</div>
-			
-			-->
-			
+									
 			<input type=submit class="btn btn-primary" value="Payer" />
 			
 		</form>
