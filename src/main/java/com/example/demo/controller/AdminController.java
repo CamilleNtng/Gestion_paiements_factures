@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.demo.model.Admin;
 import com.example.demo.repository.AdminRepository;
 import com.example.demo.repository.ClientRepository;
+import com.example.demo.service.AdminService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.Data;
@@ -21,19 +21,11 @@ public class AdminController {
 	
 	@Autowired ClientRepository clientRepository;
 	@Autowired AdminRepository adminRepository;
+	@Autowired AdminService adminService;
 
 	@GetMapping("/connexionAdmin")
 	public String ConnexionAdmin() {
-		/*
-		//faire condition if en allant chercher admin dans bdd
-		Admin admin = new Admin();
-		admin.setId(0);
-		admin.setLoginAdmin("admin");
-		admin.setPasswordAdmin("admin");
-		admin.setNom("camille");
-		admin.setPrenom("florence");
-		adminRepository.save(admin);
-		*/
+		adminService.admin();
 		return "connexionAdmin.html";
 	}
 	

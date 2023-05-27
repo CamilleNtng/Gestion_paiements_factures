@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Facture;
 import com.example.demo.repository.ClientRepository;
@@ -72,8 +73,11 @@ public class FactureController {
 	
 	@PostMapping("/invoicesToPay")
 	public String processPayment(Model model, Facture facture,
-								@RequestParam("selectedInvoices") List<String> selectedInvoices) {
+								@RequestParam("selectedInvoices") ArrayList<String> selectedInvoices,//list
+								RedirectAttributes redirectAttributes) {
 		
+		redirectAttributes.addFlashAttribute("selectedInvoices", selectedInvoices);
+		model.addAttribute("selectedInvoices", selectedInvoices);
 		List<Object[]> factures = new ArrayList<Object[]>();
 		
 	    if (selectedInvoices != null) {
@@ -100,27 +104,6 @@ public class FactureController {
 	    
 	}
 	
-	@GetMapping("/pay")
-	public String estimate(Model model) {
-		return "pay.html";
-	}
-	
-	@PostMapping("/pay")
-	public String estimatePaid(@RequestParam("modepaiement") String modepaiement) {
-		
-		if (modepaiement.equals("carte")) {
-			return "paiementCarte.html";
-	    } else if (modepaiement.equals("cheque")) {
-	    	return "paiementCheque.html";
-	    }
-	    else {
-	    	return "test1.html";
-	    }
-		
-	}
-	
-	
-	
 	@GetMapping("/invoicesPaid")
 	public String showInvoicesPaid(Model model, Facture facture, HttpServletRequest request) {
 		
@@ -130,6 +113,21 @@ public class FactureController {
 		String codeClient = clientRepository.getCodeClientFromLogin(loginSession);
 		model.addAttribute("factures", factureRepository.getPaidInvoices(codeClient));
 		return "invoicesPaid.html";
+	}
+	
+	
+	@GetMapping("/validation")
+	public String changeStatut(Model model) {
+		
+		List<Integer> selectedInvoices = (List<Integer>) model.getAttribute("selectedInvoices");
+		
+		for (int invoiceNumber : selectedInvoices) {
+			Facture facture = factureRepository.getUneFacture(invoiceNumber);
+			facture.setStatut("Payée");
+			factureRepository.save(facture);
+		}
+		
+		return "validationPaiement.html";
 	}
 	
 }

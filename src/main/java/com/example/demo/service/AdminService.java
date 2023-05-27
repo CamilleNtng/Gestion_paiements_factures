@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Client;
+import com.example.demo.model.Admin;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.FactureRepository;
+import com.example.demo.repository.AdminRepository;
 
 
 @Service
@@ -16,6 +18,22 @@ public class AdminService {
 
 	@Autowired ClientRepository clientRepository;
 	@Autowired FactureRepository factureRepository;
+	@Autowired AdminRepository adminRepository;
+	
+	public void admin() {
+		
+		if(adminRepository.adminAccess() == 0) {
+			Admin admin = new Admin();
+			admin.setId(0);
+			admin.setLoginAdmin("admin");
+			admin.setPasswordAdmin("admin");
+			admin.setNom("camille");
+			admin.setPrenom("florence");
+			adminRepository.save(admin);
+		}
+	
+	}
+	
 	
 	public String createLogin(String nom, String prenom) {
 		String login = nom+prenom;
