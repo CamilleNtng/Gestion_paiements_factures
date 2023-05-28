@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,21 +18,7 @@ public class ModePaiementController {
 	
 	// recuperation du mode de paiement choisi
 	@PostMapping("/pay")
-	public String estimatePaid(@RequestParam("modepaiement") String modepaiement) {
-		
-		//afficher montant
-		/*
-		@RequestParam("sommeMontants") Integer sommeMontants, Model model, RedirectAttributes redirectAttributes
-		Object prix = model.getAttribute("sommeMontants");
-		model.addAttribute("prix", prix);
-		Integer sommeMontants = (Integer) model.getAttribute("sommeMontants");
-		redirectAttributes.addFlashAttribute("sommeMontants", sommeMontants);
-		System.out.println(sommeMontants);
-		Integer sommeMontants = (Integer) redirectAttributes.getFlashAttributes().get("sommeMontants");
-		sommeMontants = (Integer) redirectAttributes.getFlashAttributes().get("sommeMontants");
-		redirectAttributes.addFlashAttribute("sommeMontants", sommeMontants);
-		model.addAttribute("sommeMontants", sommeMontants);
-		*/
+	public String estimatePaid(@RequestParam("modepaiement") String modepaiement, Model model) {
 				
 		if (modepaiement.equals("carte")) {			
 			return "paiementCarte.html";
@@ -40,8 +27,8 @@ public class ModePaiementController {
 	    	return "paiementCheque.html";
 	    }
 	    else {
-	    	// message veuillez sélectionner un mode de paiement
-	    	return "test1.html";
+	    	// aucun choix de paiement
+	    	return "error.html";
 	    }
 	}
 	

@@ -52,8 +52,8 @@ public class AdminController {
 		}
 		
 		else {
-			//message d'erreur
-			return "connexionAdmin.html";
+			// est cense n'y avoir qu'un admin
+			return "error.html";
 		}
 		
 	}

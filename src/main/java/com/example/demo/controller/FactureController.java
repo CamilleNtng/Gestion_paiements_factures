@@ -1,7 +1,6 @@
 package com.example.demo.controller;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.*;
 
@@ -119,8 +118,8 @@ public class FactureController {
 	        return "pay.html";
 	    }
 	    else {
-	    	// messgage comme quoi il a rien selectionne le couz (sur meme vue ou ailleurs)
-	    	return "test1.html";
+	    	// aucune selection
+	    	return "error.html";
 	    }
 	}
 	
@@ -135,48 +134,5 @@ public class FactureController {
 		model.addAttribute("factures", factureRepository.getPaidInvoices(codeClient));
 		return "invoicesPaid.html";
 	}
-	
-	/*
-	// change le statut de la facture quand elle est payee
-	@GetMapping("/validation")
-	public String changeStatut(HttpServletRequest request) {
-		
-		Cookie[] cookies = request.getCookies();
-		if (cookies != null) {
-		    for (Cookie cookie : cookies) {
-		        if (cookie.getName().equals("selectedInvoices")) {
-		        	try {
-			            String encodedSelectedInvoices = cookie.getValue();
-			            String selectedInvoicesString = URLDecoder.decode(encodedSelectedInvoices, "UTF-8");
-			            List<String> selectedInvoices = Arrays.asList(selectedInvoicesString.split(","));
-			            System.out.println(selectedInvoices);
-			            
-			            List<Integer> selectedInvoicesInt = new ArrayList<>();
-
-			            for (String invoice : selectedInvoices) {
-			                selectedInvoicesInt.add(Integer.parseInt(invoice));
-			            }
-			            
-			            for (int invoiceNumber : selectedInvoicesInt) {
-			    			Facture facture = factureRepository.getUneFacture(invoiceNumber);
-			    			facture.setStatut("Payée");
-			    			factureRepository.save(facture);
-			    		}
-				        			           				            
-				        break;
-			            
-		        	} catch (UnsupportedEncodingException e) {
-		    		    e.printStackTrace();
-		    		}
-			            
-			    }
-		    }
-		    return "validationPaiement.html";
-		}
-		else {
-			return "test1.html";
-		}
-	}
-	*/	
 	
 }

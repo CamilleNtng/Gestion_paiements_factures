@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.model.Cheque;
 import com.example.demo.model.Client;
+import com.example.demo.model.Facture;
 import com.example.demo.model.Transaction;
 import com.example.demo.model.TransactionPK;
 import com.example.demo.repository.ClientRepository;
@@ -79,6 +80,11 @@ public class ChequeController {
 			                pk.setNumFacture(numF);
 			                transaction.setTransactionPK(pk);
 			                transactionRepository.save(transaction);
+			                
+			                // change statut de la facture
+			                Facture facture = factureRepository.getUneFacture(numF);
+			                facture.setStatut("Payée");
+			    			factureRepository.save(facture);
 			            }
 						            
 				        break;
@@ -92,7 +98,7 @@ public class ChequeController {
 		    return "validationPaiement.html";
 		}
 		else {
-			return "test1.html";
+			return "error.html";
 		}
 	}
 	

@@ -34,7 +34,8 @@ public class ClientController {
 	@PostMapping("/connexionClient")
 	public String authentification(Model model,
 								   HttpSession session,
-								   @RequestParam("loginClient") String login) {
+								   @RequestParam("loginClient") String login,
+								   @RequestParam("passwordClient") String password) {
 		
 		String loginSession = (String) session.getAttribute("login");
 		
@@ -43,7 +44,17 @@ public class ClientController {
 		}
 		
 		System.out.println("login dans la session : " + loginSession);
-		return "welcomeClient.html";
+		
+		int n = clientRepository.checkUser(login, password);
+		
+		if( n == 1) {
+			return "welcomeClient.html";
+		}
+		
+		else {
+			// est cense n'y avoir qu'un profil
+			return "error.html";
+		}
 	}
 	
 	// formulaire creation de compte client
