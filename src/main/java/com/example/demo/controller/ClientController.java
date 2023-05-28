@@ -94,10 +94,19 @@ public class ClientController {
 	}
 	
 	// retour au dashboard client
-		@PostMapping("/dashboardClient")
-		public String dasboardClient() {
-				
-		    return "welcomeClient.html";
-		}
+	@PostMapping("/dashboardClient")
+	public String dasboardClient() {
+		
+	    return "welcomeClient.html";
+	}
+		
+	// liste client
+	@GetMapping("/user")
+	public String getUser(Model model, Client client) {
+		
+		model.addAttribute("users", clientRepository.getUsers());
+		
+		return "user.html";
+	}
 	
 }

@@ -61,8 +61,45 @@ public class FactureController {
 		return "gererFacture.html";
 	}
 	
+	// suppression facture par admin
+	@GetMapping("/deleteInvoice")
+	public String formDeleteInvoice() {
+		return "deleteInvoice.html";
+	}
+		
+	// affichage des factures mis a jour
+	@PostMapping("/deleteInvoice")
+	public String deleteFacture(Model model, Facture facture, @RequestParam("num") String num) {
+		
+		factureRepository.deleteById(num);
+		model.addAttribute("factures", factureRepository.getFactures());
+		
+		return "gererFacture.html";
+	}
 	
+	// modification facture par admin
+	@GetMapping("/updateInvoice")
+	public String formMAJInvoice() {
+		return "updateInvoice.html";
+	}
+			
+	// affichage des factures mis a jour
+	@PostMapping("/updateInvoice")
+	public String updateFacture(Model model,
+								@RequestParam("num") int num,
+								@RequestParam("intitule") String intitule,
+								@RequestParam("montant") int montant) {
+		
+		Facture facture = factureRepository.getUneFacture(num);	
+		facture.setIntitule(intitule);
+		facture.setMontantF(montant);
+		factureRepository.save(facture);
+		model.addAttribute("factures", factureRepository.getFactures());
+			
+		return "gererFacture.html";
+	}
 	
+		
 	///////////// vues des factures côté client
 	
 	

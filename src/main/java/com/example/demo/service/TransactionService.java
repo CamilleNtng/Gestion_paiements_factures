@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class TransactionService {
 	
+	/* 
+	// PAS BESOIN
 	public int verification(int montantFacture, int montantTransaction) {
 		
 		if(montantFacture == montantTransaction) {
@@ -18,6 +20,7 @@ public class TransactionService {
 		}
 		
 	}
+	*/
 
 	// date de la transaction = date a laquelle elle est faite
 	public LocalDate dateTransaction() {

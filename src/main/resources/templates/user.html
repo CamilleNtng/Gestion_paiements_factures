@@ -19,46 +19,33 @@
 	padding: 70px;
 	text-align: center;
 }
-.btn{
-	padding: 10px;
-	text-align: center;
-}
 </style>
 
 <body class="content">
 
 <div class="texte">
-Liste des factures :
+Liste des clients :
 </div>
 
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Numéro</th>
-      <th scope="col">Intitulé</th>
-      <th scope="col">Montant</th>
-      <th scope="col">Client</th>
-      <th scope="col">Statut</th>
+      <th scope="col">Code client</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Prénom</th>
     </tr>
   </thead>
   <tbody>
-    <tr th:each="c : ${factures}">
+    <tr th:each="c : ${users}">
       <td th:text = "${c[0]}"></td>
       <td th:text = "${c[1]}"></td>
-      <td th:text = "${c[2]} + €"></td>
-      <td th:text = "${c[3]}"></td>
-      <td th:text = "${c[4]}"></td>
+      <td th:text = "${c[2]}"></td>
     </tr>
   </tbody>
 </table>
 
 <footer>
 <div class="bouton">
-<a class="btn btn-secondary btn-lg" href="/addInvoice" role="button">Ajouter une facture</a>
-<a class="btn btn-outline-warning btn-lg" href="/updateInvoice" role="button">Modifier une facture</a>
-<a class="btn btn-outline-secondary btn-lg" href="/deleteInvoice" role="button">Supprimer une facture</a>
-</div>
-<div class="btn">
 <a class="btn btn-dark" href="/welcomeAdmin" role="button">Dashboard</a>
 </div>
 </footer>
