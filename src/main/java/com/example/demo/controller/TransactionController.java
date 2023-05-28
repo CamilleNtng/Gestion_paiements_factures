@@ -14,6 +14,8 @@ public class TransactionController {
 	
 	@Autowired TransactionRepository transactionRepository;
 
+	
+	// affichage des transactions
 	@GetMapping("/getAllTransactions")
 	public String showTransactions(Model model, Transaction transaction) {
 		

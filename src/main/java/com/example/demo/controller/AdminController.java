@@ -23,12 +23,15 @@ public class AdminController {
 	@Autowired AdminRepository adminRepository;
 	@Autowired AdminService adminService;
 
+	
+	// creation de l'admin en dur
 	@GetMapping("/connexionAdmin")
 	public String ConnexionAdmin() {
 		adminService.admin();
 		return "connexionAdmin.html";
 	}
 	
+	// connexion admin
 	@PostMapping("/connexionAdmin")
 	public String authentification(Model model,
 									HttpSession session,
@@ -56,6 +59,7 @@ public class AdminController {
 		
 	}
 	
+	// affichage dashboard admin
 	@GetMapping("/welcomeAdmin")
 	public String dashboard() {
 		return "welcomeAdmin.html";

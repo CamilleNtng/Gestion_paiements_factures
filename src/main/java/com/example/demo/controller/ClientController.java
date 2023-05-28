@@ -22,12 +22,15 @@ public class ClientController {
 	@Autowired ClientRepository clientRepository;
 	@Autowired AdminService adminService;
 
+	
+	// formulaire connexion client
 	@GetMapping("/connexionClient")
 	public String ConnexionClient() {
 				
 		return "connexionClient.html";
 	}
 	
+	// connexion client
 	@PostMapping("/connexionClient")
 	public String authentification(Model model,
 								   HttpSession session,
@@ -43,11 +46,13 @@ public class ClientController {
 		return "welcomeClient.html";
 	}
 	
+	// formulaire creation de compte client
 	@GetMapping("/newAccount")
 	public String newAccount() {
 		return "formAccount.html";
 	}
 	
+	// creation compte client par admin
 	@PostMapping("/newAccount")
 	public String account(Model model,
 							@RequestParam("nom") String nom,
@@ -59,6 +64,7 @@ public class ClientController {
 		return "new.html";
 	}
 	
+	// demande creation compte client
 	@GetMapping("/askAccount")
 	public String askAccount() {
 		return "askAccount.html";

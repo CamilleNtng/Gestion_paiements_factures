@@ -14,6 +14,7 @@ public class FactureService {
 	@Autowired ClientRepository clientRepository;
 	@Autowired FactureRepository factureRepository;
 	
+	// ajout d'une facture
 	public Facture addFacture(int num, String intitule, int montant, String nom, String prenom) {
 		
 		Facture f = new Facture();
@@ -23,6 +24,7 @@ public class FactureService {
 		String numClient = clientRepository.getCodeClient(nom, prenom);
 	    f.setCodeClient(numClient);
 		factureRepository.save(f);
+		
 		return f;
 	}
 		

@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class ModePaiementController {
 	
-	
+	// choix du mode de paiement
 	@GetMapping("/pay")
 	public String estimate() {
 		return "pay.html";
 	}
 	
+	// recuperation du mode de paiement choisi
 	@PostMapping("/pay")
 	public String estimatePaid(@RequestParam("modepaiement") String modepaiement) {
 		

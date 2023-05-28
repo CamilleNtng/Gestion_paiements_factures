@@ -19,6 +19,7 @@ public class TransactionService {
 		
 	}
 
+	// date de la transaction = date a laquelle elle est faite
 	public LocalDate dateTransaction() {
 		return LocalDate.now();
 	}

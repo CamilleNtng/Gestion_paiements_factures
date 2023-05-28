@@ -1,5 +1,8 @@
 package com.example.demo.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,14 +11,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.demo.model.Facture;
 import com.example.demo.repository.ClientRepository;
 import com.example.demo.repository.FactureRepository;
 import com.example.demo.service.FactureService;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
@@ -26,8 +30,10 @@ public class FactureController {
 	@Autowired FactureService factureService;
 	@Autowired ClientRepository clientRepository;
 		
-	// vue factures côté admin
 	
+	///////////// vue factures côté admin
+	
+	// affichage des factures
 	@GetMapping("/getAllInvoices")
 	public String showPageInvoice(Model model, Facture facture) {
 				
@@ -36,14 +42,13 @@ public class FactureController {
 		return "gererFacture.html";
 	}
 	
-	
 	// ajout facture par admin
-	
 	@GetMapping("/addInvoice")
 	public String formAddInvoice() {
 		return "addInvoice.html";
 	}
 	
+	// affichage des factures mis a jour
 	@PostMapping("/addInvoice")
 	public String gererFacture(Model model,
 								@RequestParam("num") int num,
@@ -58,8 +63,11 @@ public class FactureController {
 	}
 	
 	
-	// vues des factures côté client
 	
+	///////////// vues des factures côté client
+	
+	
+	// affichage des factures a payer
 	@GetMapping("/invoicesToPay")
 	public String showInvoicesToPay(Model model, Facture facture, HttpServletRequest request) {
 		
@@ -71,12 +79,25 @@ public class FactureController {
 		return "invoicesToPay.html";
 	}
 	
+	// affichage des factures selectionnees pour payer
 	@PostMapping("/invoicesToPay")
 	public String processPayment(Model model, Facture facture,
-								@RequestParam("selectedInvoices") ArrayList<String> selectedInvoices,//list
-								RedirectAttributes redirectAttributes) {
+								@RequestParam("selectedInvoices") List<String> selectedInvoices,
+								HttpServletResponse response) {
 		
-		redirectAttributes.addFlashAttribute("selectedInvoices", selectedInvoices);
+		// recuperation des factures selectionnees pour les utiliser ailleurs
+		try {
+		    String selectedInvoicesString = String.join(",", selectedInvoices);
+		    String encodedSelectedInvoices = URLEncoder.encode(selectedInvoicesString, "UTF-8");
+		    Cookie cookie = new Cookie("selectedInvoices", encodedSelectedInvoices);
+		    response.addCookie(cookie);
+		} catch (UnsupportedEncodingException e) {
+		    e.printStackTrace();
+		}
+
+		System.out.println(selectedInvoices);
+		
+		// affichage du devis
 		model.addAttribute("selectedInvoices", selectedInvoices);
 		List<Object[]> factures = new ArrayList<Object[]>();
 		
@@ -101,9 +122,9 @@ public class FactureController {
 	    	// messgage comme quoi il a rien selectionne le couz (sur meme vue ou ailleurs)
 	    	return "test1.html";
 	    }
-	    
 	}
 	
+	// affichage des factures payees
 	@GetMapping("/invoicesPaid")
 	public String showInvoicesPaid(Model model, Facture facture, HttpServletRequest request) {
 		
@@ -115,19 +136,47 @@ public class FactureController {
 		return "invoicesPaid.html";
 	}
 	
-	
+	/*
+	// change le statut de la facture quand elle est payee
 	@GetMapping("/validation")
-	public String changeStatut(Model model) {
+	public String changeStatut(HttpServletRequest request) {
 		
-		List<Integer> selectedInvoices = (List<Integer>) model.getAttribute("selectedInvoices");
-		
-		for (int invoiceNumber : selectedInvoices) {
-			Facture facture = factureRepository.getUneFacture(invoiceNumber);
-			facture.setStatut("Payée");
-			factureRepository.save(facture);
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        if (cookie.getName().equals("selectedInvoices")) {
+		        	try {
+			            String encodedSelectedInvoices = cookie.getValue();
+			            String selectedInvoicesString = URLDecoder.decode(encodedSelectedInvoices, "UTF-8");
+			            List<String> selectedInvoices = Arrays.asList(selectedInvoicesString.split(","));
+			            System.out.println(selectedInvoices);
+			            
+			            List<Integer> selectedInvoicesInt = new ArrayList<>();
+
+			            for (String invoice : selectedInvoices) {
+			                selectedInvoicesInt.add(Integer.parseInt(invoice));
+			            }
+			            
+			            for (int invoiceNumber : selectedInvoicesInt) {
+			    			Facture facture = factureRepository.getUneFacture(invoiceNumber);
+			    			facture.setStatut("Payée");
+			    			factureRepository.save(facture);
+			    		}
+				        			           				            
+				        break;
+			            
+		        	} catch (UnsupportedEncodingException e) {
+		    		    e.printStackTrace();
+		    		}
+			            
+			    }
+		    }
+		    return "validationPaiement.html";
 		}
-		
-		return "validationPaiement.html";
+		else {
+			return "test1.html";
+		}
 	}
+	*/	
 	
 }

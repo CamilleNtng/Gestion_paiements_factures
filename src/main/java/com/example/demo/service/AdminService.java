@@ -20,6 +20,8 @@ public class AdminService {
 	@Autowired FactureRepository factureRepository;
 	@Autowired AdminRepository adminRepository;
 	
+	
+	// creation de l'admin
 	public void admin() {
 		
 		if(adminRepository.adminAccess() == 0) {
@@ -34,12 +36,13 @@ public class AdminService {
 	
 	}
 	
-	
+	// creation d'un login
 	public String createLogin(String nom, String prenom) {
 		String login = nom+prenom;
 		return login;
 	}
 	
+	// creation d'un mot de passe
 	public String createPassword() {
 		final String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 		SecureRandom random = new SecureRandom();
@@ -62,6 +65,7 @@ public class AdminService {
 		return code;
 	}
 	
+	// creation d'un compte client
 	public Client createAccount(String nom, String prenom) {
 		
 		Client client = new Client();

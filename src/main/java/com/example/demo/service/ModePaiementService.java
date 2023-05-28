@@ -17,6 +17,8 @@ public class ModePaiementService {
 
 	@Autowired ModePaiementRepository modepaiementRepository;
 	
+	
+	// creation d'un code
 	public int createCode() {
 		
 		Random rand = new Random();
@@ -24,6 +26,7 @@ public class ModePaiementService {
 		return code;
 	}
 	
+	// creation d'une carte bancaire
 	public CarteBancaire newCarte(Client client, int num, LocalDate date) {
 		
 		CarteBancaire carte = new CarteBancaire();
@@ -36,6 +39,7 @@ public class ModePaiementService {
 		return carte;
 	}
 	
+	// creation d'un cheque
 	public void newCheque(Client client, int num) {
 		
 		Cheque cheque = new Cheque();
