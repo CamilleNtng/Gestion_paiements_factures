@@ -19,9 +19,6 @@ public interface AdminRepository extends JpaRepository<Admin, String>{
 	@Query("SELECT count(*) from Admin a WHERE a.loginAdmin=:LOGIN AND a.passwordAdmin=:PASSWORD")
 	public int checkUser(@Param("LOGIN") String login, @Param("PASSWORD") String password);
 	
-	@Query("SELECT a.prenom from Admin a WHERE a.loginAdmin=:LOGIN")
-	public String getName(@Param("LOGIN") String login);
-	
 	@Query("select count(*) from Admin")
 	public int adminAccess();
 	

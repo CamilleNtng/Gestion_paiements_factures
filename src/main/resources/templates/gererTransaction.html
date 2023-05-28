@@ -36,7 +36,7 @@ Liste des transactions :
   </thead>
   <tbody>
     <tr th:each="c : ${transactions}">
-      <td th:text = "${c[0]}"></td>
+      <td th:text = "${c[0]}+ ' €'"></td>
       <td th:text = "${c[1]}"></td>
     </tr>
   </tbody>

@@ -28,9 +28,7 @@
 <body>
 
 	<div class="texte">
-	Bienvenue 
-	<p th:text="${id}"></p>
-	!
+	Bienvenue !
 	</div>
 	
 	<div class="choix">
@@ -41,10 +39,12 @@
 	
 	<footer>
 	<div class="bouton">
-	<a class="btn btn-dark btn-sm" href="/home" role="button">Déconnexion</a>
+	<form method=post action="/deconnexionAdmin">
+	<input type=submit class="btn btn-dark btn-sm" value="Déconnexion" />
+	</form>
 	</div>
 	</footer>
-
+	
 </body>
 
 </html>

@@ -48,7 +48,6 @@ public class AdminController {
 		int n = adminRepository.checkUser(login, password);
 		
 		if( n == 1) {
-			model.addAttribute("id", adminRepository.getName(loginSession));
 			return "welcomeAdmin.html";
 		}
 		
@@ -63,6 +62,18 @@ public class AdminController {
 	@GetMapping("/welcomeAdmin")
 	public String dashboard() {
 		return "welcomeAdmin.html";
+	}
+	
+	// deconnexion admin
+	@PostMapping("/deconnexionAdmin")
+	public String deconnexionAdmin(HttpSession session) {
+		
+		String loginSession = (String) session.getAttribute("login");
+		System.out.println("login dans la session : " + loginSession);
+		session.invalidate(); // Supprime toutes les données de session
+		System.out.println("login dans la session : " + loginSession);
+
+	    return "connexionAdmin.html";
 	}
 			
 }

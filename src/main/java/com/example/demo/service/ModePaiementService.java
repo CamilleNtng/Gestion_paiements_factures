@@ -40,7 +40,7 @@ public class ModePaiementService {
 	}
 	
 	// creation d'un cheque
-	public void newCheque(Client client, int num) {
+	public Cheque newCheque(Client client, int num) {
 		
 		Cheque cheque = new Cheque();
 		int code = createCode();
@@ -48,6 +48,7 @@ public class ModePaiementService {
 		cheque.setClient(client);
 		cheque.setNumCheque(num);
 		modepaiementRepository.save(cheque);
+		return cheque;
 	}
 
 }

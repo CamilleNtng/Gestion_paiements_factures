@@ -70,4 +70,23 @@ public class ClientController {
 		return "askAccount.html";
 	}
 	
+	// deconnexion client
+	@PostMapping("/deconnexionClient")
+	public String deconnexionClient(HttpSession session) {
+			
+		String loginSession = (String) session.getAttribute("login");
+		System.out.println("login dans la session : " + loginSession);
+		session.invalidate(); //supprime toutes les données de session
+		System.out.println("login dans la session : " + loginSession);
+
+	    return "connexionClient.html";
+	}
+	
+	// retour au dashboard client
+		@PostMapping("/dashboardClient")
+		public String dasboardClient() {
+				
+		    return "welcomeClient.html";
+		}
+	
 }
